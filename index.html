@@ -11,17 +11,21 @@
         --space-lg: 2em;
         --space-xl: 3em;
         --space-xxl: 4em;
+        --color-accent: #2B65D9;
+        --color-bg: #F2F2F2;
+        --color-fg: #000000;
       }
       html {
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
         -webkit-font-smoothing: antialiased;
         font-size: 16px;
         font-size: min(max(1rem, 2.2vw), 22px);
+        color: var(--color-fg);
       }
       body {
         margin: 0;
         padding: 0;
-        background-color: #F2F2F2;
+        background-color: var(--color-bg);
       }
       .container {
         display: grid;
@@ -77,7 +81,12 @@
         letter-spacing: .01em;
         line-height: 1.2em;
         text-transform: none;
+        
       }
+      .headline__item--accent {
+        color: var(--color-accent);
+      }
+
     </style>
   </head>
   <body>
@@ -99,7 +108,7 @@
         <ul class="headline">
           <li class="headline__item">Ideate.</li>
           <li class="headline__item">Experiment.</li>
-          <li class="headline__item">Build.</li>
+          <li class="headline__item headline__item--accent">Build.</li>
           <li class="headline__item">Iterate.</li>
         </ul>
       </div>
