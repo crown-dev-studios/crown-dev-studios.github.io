@@ -3,61 +3,95 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="software development consulting">
-    <title>crown dev studios</title>
+    <title>crown.dev</title>
     <style>
-      html,
+      html {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+      }
       body {
         margin: 0;
         padding: 0;
-        height: 100%;
-        -webkit-font-smoothing: antialiased;
-        font-size: 16px;
+        font-size: min(max(1rem, 2.2vw), 18px);
+        background-color: #F2F2F2;
       }
-      body {
-        color: #0A0708;
-        background-color: #BDC3CB;
-        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+      .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 48px 1fr 48px;
+        grid-template-areas:
+          "header"
+          "content"
+          "footer";
+        height: 100vh;
+      }
+      .header  {
+        grid-area: header;
         display: flex;
       }
-      .box {
-        display: flex;
-        flex: 1 1 auto;
+      .content {
+        grid-area: content;
       }
-      .box.center {
+      .footer {
+        grid-area: footer;
+        display: flex;
+        font-size: .7em;
+        align-items: center;
         justify-content: center;
+      }
+      .nav {
+        display: flex;
+        flex: 1 1 0;
+        justify-content: space-between;
+        padding: 0 1em;
         align-items: center;
       }
-      .head-line {
-        text-align: center;
-        line-height: 1em;
-        font-size: 2.7vw;
-        letter-spacing: -1px;
+      .nav__logo {
+        font-size: 1.2em;
       }
-      .site-nav {
-        position:absolute;
-        top: 0;
-        right: 0;
-        font-size: 1.5em;
+      .nav__menu {
+
       }
-      .site-nav a {
-        color: #000000;
-        display: inline-block;
-        text-decoration: none;
-        padding: 24px;
-        /* background-color: #FFE300; */
+      .box {
+        padding: 0 1em;
       }
-      strong {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      .headline {
+        font-family: Arial,Helvetica,sans-serif;
         font-weight: 900;
+        font-style: normal;
+        font-size: 6em;
+        letter-spacing: .01em;
+        line-height: 1.2em;
+        text-transform: none;
+        list-style: none;
       }
     </style>
   </head>
   <body>
-    <nav class="site-nav">
-      <a href="mailto:hi@crown.dev">contact</a>
-    </nav>
-    <div class="box center">
-      <p class="head-line"><strong>crown dev studios</strong> - software development consulting</p>
+    <div class="container">
+      <header class="header">
+        <nav class="nav">
+          <h1 class="nav__logo">
+            crown.dev
+          </h1>
+          <div class="nav__menu">
+            <a class="nav__menu-link" href="mailto:hi@crown.dev">contact</a>
+          </div>
+        </nav>
+      </header>
+      <div class="content">
+        <ul class="headline">
+          <li>Ideate.</li>
+          <li>Experiment.</li>
+          <li>Build.</li>
+          <li>Iterate.</li>
+        </ul>
+      </div>
+      <div class="footer box">
+        &copy; 2021 Crown Sev Studios, LLC. All rights reserved.
+      </div>
     </div>
+    
   </body>
 </html>
