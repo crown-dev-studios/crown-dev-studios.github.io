@@ -5,6 +5,13 @@
     <meta name="description" content="software development consulting">
     <title>crown.dev</title>
     <style>
+      :root {
+        --space-sm: .5em;
+        --space-md: 1em;
+        --space-lg: 2em;
+        --space-xl: 3em;
+        --space-xxl: 4em;
+      }
       html {
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
         -webkit-font-smoothing: antialiased;
@@ -19,7 +26,7 @@
       .container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 4em 1fr 4em;
+        grid-template-rows: var(--space-xxl) 1fr var(--space-xxl);
         grid-template-areas:
           "header"
           "content"
@@ -46,7 +53,7 @@
         display: flex;
         flex: 1 1 0;
         justify-content: space-between;
-        padding: 0 1em;
+        padding: 0 var(--space-lg);
         align-items: center;
       }
       .nav__logo {
@@ -55,11 +62,11 @@
       .nav__menu {
 
       }
-      .box {
-        padding: 0 1em;
-      }
       .headline {
         list-style: none;
+        margin: 0;
+        padding: 0 var(--space-lg);
+        padding-top: var(--space-xl);
       }
       .headline__item {
         font-family: Arial,Helvetica,sans-serif;
@@ -80,7 +87,10 @@
             crown.dev
           </h1>
           <div class="nav__menu">
-            <a class="nav__menu-link" href="mailto:hi@crown.dev">contact</a>
+            <a class="nav__menu-link" href="mailto:hi@crown.dev" title="Contact us">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm17 4.238l-7.928 7.1L4 7.216V19h16V7.238zM4.511 5l7.55 6.662L19.502 5H4.511z"/></svg>
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"/></svg> -->
+            </a>
           </div>
         </nav>
       </header>
@@ -92,7 +102,7 @@
           <li class="headline__item">Iterate.</li>
         </ul>
       </div>
-      <div class="footer box">
+      <div class="footer">
         &copy; 2021 Crown Dev Studios, LLC. All Rights Reserved.
       </div>
     </div>
