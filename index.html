@@ -7,13 +7,13 @@
     <style>
       html {
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-        font-size: 16px;
         -webkit-font-smoothing: antialiased;
+        font-size: 16px;
+        font-size: min(max(1rem, 2.2vw), 22px);
       }
       body {
         margin: 0;
         padding: 0;
-        font-size: min(max(1rem, 2.2vw), 18px);
         background-color: #F2F2F2;
       }
       .container {
@@ -32,11 +32,13 @@
       }
       .content {
         grid-area: content;
+        align-items: center;
+        display: flex;
       }
       .footer {
         grid-area: footer;
         display: flex;
-        font-size: .7em;
+        font-size: .85em;
         align-items: center;
         justify-content: center;
       }
@@ -57,14 +59,16 @@
         padding: 0 1em;
       }
       .headline {
+        list-style: none;
+      }
+      .headline__item {
         font-family: Arial,Helvetica,sans-serif;
         font-weight: 900;
         font-style: normal;
-        font-size: 6em;
+        font-size: 7em;
         letter-spacing: .01em;
         line-height: 1.2em;
         text-transform: none;
-        list-style: none;
       }
     </style>
   </head>
@@ -82,10 +86,10 @@
       </header>
       <div class="content">
         <ul class="headline">
-          <li>Ideate.</li>
-          <li>Experiment.</li>
-          <li>Build.</li>
-          <li>Iterate.</li>
+          <li class="headline__item">Ideate.</li>
+          <li class="headline__item">Experiment.</li>
+          <li class="headline__item">Build.</li>
+          <li class="headline__item">Iterate.</li>
         </ul>
       </div>
       <div class="footer box">
