@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="software development consulting" />
+    <title>crown.dev</title>
+    <style>
+      :root {
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+        --space-xxl: 4rem;
+        --color-accent: #2b65d9;
+        --color-accent-two: #ff4000;
+        --color-bg: #f2f2f2;
+        --color-fg: #000000;
+      }
+      html {
+        font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+          helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: var(--color-fg);
+      }
+      @media screen and (max-device-width: 600px) {
+        html {
+          font-size: 16pt;
+        }
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-bg);
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: var(--space-xxl) 1fr var(--space-xxl);
+        grid-template-areas:
+          'header'
+          'content'
+          'footer';
+        height: 100vh;
+      }
+      .header {
+        grid-area: header;
+        display: flex;
+        align-content: center;
+      }
+      .content {
+        grid-area: content;
+        display: grid;
+      }
+      .footer {
+        grid-area: footer;
+        display: grid;
+        padding: 0 var(--space-lg);
+        align-content: center;
+        justify-content: flex-start;
+      }
+      .nav {
+        display: flex;
+        flex: 1 1 0;
+        justify-content: flex-end;
+        padding: 0 var(--space-lg);
+        align-items: center;
+      }
+      .nav__menu-link {
+        text-decoration: none;
+        margin-left: var(--space-md);
+      }
+      .headline {
+        list-style: none;
+        list-style-position: outside;
+        padding: 0 var(--space-lg);
+        align-self: center;
+        border-left: 1rem solid var(--color-accent-two);
+      }
+      .headline__item {
+        font-weight: 300;
+        font-style: normal;
+        font-size: 1.5rem;
+        letter-spacing: 0.075rem;
+        text-transform: none;
+      }
+      .headline__item--accent {
+        color: var(--color-accent);
+      }
+      .brand {
+        font-weight: 700;
+        font-size: 2em;
+        align-self: center;
+        margin: 0 var(--space-lg) 0 0;
+      }
+      .content__home {
+        display: flex;
+        justify-content: center;
+      }
+      .sidepanel {
+        background-color: var(--color-fg);
+        color: var(--color-bg);
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 0;
+        bottom: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s linear 300ms, opacity 300ms;
+      }
+      .sidepanel--open {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s linear 0s, opacity 300ms;
+      }
+      .sidepanel__content {
+        padding: 0 var(--space-lg);
+      }
+      .sidepanel .nav {
+        padding: 0px;
+      }
+      .sidepanel .nav__menu-link {
+        color: var(--color-bg);
+        margin: 0px;
+      }
+      .sidepanel .content {
+        align-items: center;
+        line-height: 1.5;
+      }
+      .sidepanel .accent {
+        color: var(--color-accent-two);
+      }
+      .subheading {
+        font-size: 1.2rem;
+        line-height: 1;
+        align-self: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <nav class="nav">
+          <div class="nav__menu">
+            <a class="nav__menu-link" href="javascript:openSidePanel()" title="about">about.</a>
+            <a class="nav__menu-link" href="mailto:hi@crown.dev" title="contact">contact.</a>
+          </div>
+        </nav>
+      </header>
+      <div class="content">
+        <div class="content__home">
+          <h1 class="brand">crown.dev</h1>
+          <ul class="headline">
+            <li class="headline__item">Ideate.</li>
+            <li class="headline__item">Experiment.</li>
+            <li class="headline__item">Build.</li>
+            <li class="headline__item">Iterate.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">&copy; 2021 Crown Dev Studios, LLC. All Rights Reserved.</div>
+      <section class="sidepanel" id="sidepanel">
+        <div class="sidepanel__content">
+          <div class="container">
+            <header class="header">
+              <h2 class="subheading">about</h2>
+              <nav class="nav">
+                <div class="nav__menu">
+                  <a class="nav__menu-link" href="javascript:closeSidePanel()" title="close"
+                    >close.</a
+                  >
+                </div>
+              </nav>
+            </header>
+            <div class="content">
+              <div>
+                <p>
+                  crown.dev is a software development studio in Brooklyn run by Marvin Charles and
+                  Justin Williams.
+                </p>
+                <p>
+                  We specialize in working closely with clients to design and develop
+                  fit-for-purpose experiences for their users. We have first hand-experience
+                  building software for Trading, Consumer Finance, and Two-Sided Marketplaces.
+                </p>
+                <p>
+                  We met as interns at Goldman Sachs where we both worked in the technology
+                  division. Since then we've honed our skills working on various projects such as
+                  Marquee Trader, Marcus, Louisa, Handy, and CashApp.
+                </p>
+                <p>
+                  Let’s chat —
+                  <a class="nav__menu-link accent" href="mailto:hi@crown.dev" title="contact"
+                    >hi@crown.dev</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+  <script>
+    var sidePanel = document.getElementById('sidepanel')
+    function openSidePanel() {
+      if (sidePanel) {
+        sidePanel.classList.add('sidepanel--open')
+      }
+    }
+    function closeSidePanel() {
+      if (sidePanel) {
+        sidePanel.classList.remove('sidepanel--open')
+      }
+    }
+  </script>
+</html>
