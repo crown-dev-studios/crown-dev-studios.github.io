@@ -214,25 +214,12 @@
     }
 
     .service-card {
-      background: var(--white);
+      background: var(--black);
       padding: 3rem;
       border: 2px solid var(--black);
       position: relative;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .service-card::after {
@@ -242,15 +229,11 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: var(--black);
+      background: var(--white);
       transform: scaleY(0);
       transform-origin: bottom;
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 0;
-    }
-
-    .service-card:hover::before {
-      transform: scaleX(1);
     }
 
     .service-card:hover::after {
@@ -265,7 +248,7 @@
     .service-card:hover .service-number,
     .service-card:hover h3,
     .service-card:hover p {
-      color: var(--white);
+      color: var(--black);
       position: relative;
       z-index: 1;
     }
@@ -292,10 +275,11 @@
       position: relative;
       z-index: 1;
       transition: color 0.3s;
+      color: var(--white);
     }
 
     .service-card p {
-      color: var(--gray-600);
+      color: var(--gray-300);
       font-weight: 300;
       line-height: 1.6;
       position: relative;
