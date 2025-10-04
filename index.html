@@ -97,16 +97,11 @@
       box-sizing: border-box;
     }
 
-    html {
-      overflow-x: hidden;
-    }
-
     body {
       font-family: mundial, -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--white);
       color: var(--black);
       line-height: 1.5;
-      overflow-x: hidden;
       width: 100%;
       position: relative;
     }
@@ -214,6 +209,12 @@
     .hero-visual {
       position: relative;
       aspect-ratio: 1;
+    }
+
+    @media (max-width: 968px) {
+      .hero-visual {
+        overflow: hidden;
+      }
     }
 
     .geometric-shapes {
@@ -375,6 +376,18 @@
       position: relative;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       overflow: hidden;
+    }
+
+    @media (max-width: 968px) {
+      .services-grid {
+        display: block;
+      }
+
+      .service-card {
+        position: sticky;
+        top: 100px;
+        margin-bottom: 1rem;
+      }
     }
 
     .service-card::after {
