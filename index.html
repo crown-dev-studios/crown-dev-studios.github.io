@@ -644,6 +644,45 @@
       .hero-visual {
         max-width: 400px;
         margin: 0 auto;
+        min-height: 400px;
+      }
+
+      .geometric-shapes {
+        overflow: visible;
+      }
+
+      .shape {
+        animation: shapeEnterMobile 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .shape-1 {
+        transform: scale(0.8) translate(100%, -100%) rotate(45deg);
+      }
+
+      .shape-2 {
+        transform: scale(0.8) translate(-100%, 100%) rotate(-45deg);
+      }
+
+      .shape-3 {
+        transform: scale(0.8) translate(-52%, -44%) scale(0) rotate(180deg);
+      }
+
+      @keyframes shapeEnterMobile {
+        to {
+          opacity: 1;
+          transform: scale(0.8) translate(0, 0) rotate(0deg);
+        }
+      }
+
+      .shape-3 {
+        animation-name: shapeEnterCenterMobile;
+      }
+
+      @keyframes shapeEnterCenterMobile {
+        to {
+          opacity: 1;
+          transform: scale(0.8) translate(-52%, -44%) scale(1) rotate(0deg);
+        }
       }
 
       .footer-content {
