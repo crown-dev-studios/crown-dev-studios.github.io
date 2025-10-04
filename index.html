@@ -377,18 +377,6 @@
       overflow: hidden;
     }
 
-    @media (max-width: 968px) {
-      .services-grid {
-        display: block;
-      }
-
-      .service-card {
-        position: sticky;
-        top: 100px;
-        margin-bottom: 1rem;
-      }
-    }
-
     .service-card::after {
       content: '';
       position: absolute;
@@ -403,25 +391,27 @@
       z-index: 0;
     }
 
-    .service-card:hover::after {
-      transform: scaleY(1);
-    }
+    @media (min-width: 969px) {
+      .service-card:hover::after {
+        transform: scaleY(1);
+      }
 
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 12px 12px 0 var(--accent);
-    }
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 12px 12px 0 var(--accent);
+      }
 
-    .service-card:hover .service-number,
-    .service-card:hover h3,
-    .service-card:hover p {
-      color: var(--black);
-      position: relative;
-      z-index: 1;
-    }
+      .service-card:hover .service-number,
+      .service-card:hover h3,
+      .service-card:hover p {
+        color: var(--black);
+        position: relative;
+        z-index: 1;
+      }
 
-    .service-card:hover .service-number {
-      color: var(--accent);
+      .service-card:hover .service-number {
+        color: var(--accent);
+      }
     }
 
     .service-number {
