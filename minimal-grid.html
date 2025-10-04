@@ -4,9 +4,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Crown Dev Studios - Clean Lines, Bold Design">
+
+  <!-- Primary Meta Tags -->
+  <title>Crown Dev Studios | Brooklyn Software Consultancy | Build. Scale. Succeed.</title>
+  <meta name="title" content="Crown Dev Studios | Brooklyn Software Consultancy | Build. Scale. Succeed.">
+  <meta name="description" content="Brooklyn-based software consultancy turning complex technical challenges into elegant, scalable solutions. Expert in TypeScript, Golang, React, iOS, Android, AWS, and cloud architecture.">
+  <meta name="keywords" content="software consultancy, custom development, technical strategy, system integration, Brooklyn software studio, TypeScript, Golang, React, AWS, GCP, mobile development">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://crown.dev/">
+  <meta property="og:title" content="Crown Dev Studios | Brooklyn Software Consultancy">
+  <meta property="og:description" content="Brooklyn-based software consultancy turning complex technical challenges into elegant, scalable solutions.">
+  <meta property="og:image" content="https://crown.dev/logo-lockup-dark.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://crown.dev/">
+  <meta property="twitter:title" content="Crown Dev Studios | Brooklyn Software Consultancy">
+  <meta property="twitter:description" content="Brooklyn-based software consultancy turning complex technical challenges into elegant, scalable solutions.">
+  <meta property="twitter:image" content="https://crown.dev/logo-lockup-dark.png">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://crown.dev/">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  <link rel="dns-prefetch" href="https://use.typekit.net">
+
+  <!-- Fonts -->
   <link rel="stylesheet" href="https://use.typekit.net/nkm5lpa.css">
-  <title>Crown Dev Studios</title>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Crown Dev Studios",
+    "image": "https://crown.dev/logo-lockup-dark.png",
+    "description": "Brooklyn-based software consultancy turning complex technical challenges into elegant, scalable solutions.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Brooklyn",
+      "addressRegion": "NY",
+      "addressCountry": "US"
+    },
+    "url": "https://crown.dev",
+    "email": "hi@crown.dev",
+    "priceRange": "$$$$",
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "serviceType": [
+      "Custom Software Development",
+      "Technical Strategy Consulting",
+      "System Integration",
+      "Performance Optimization",
+      "Migration Services",
+      "Technical Due Diligence"
+    ],
+    "knowsAbout": [
+      "TypeScript",
+      "Golang",
+      "Kotlin",
+      "Swift",
+      "React",
+      "Svelte",
+      "iOS Development",
+      "Android Development",
+      "AWS",
+      "Google Cloud Platform",
+      "Docker",
+      "Terraform"
+    ]
+  }
+  </script>
+
   <style>
     :root {
       --black: #000000;
@@ -772,9 +846,8 @@
           <div class="tech-item">Node.js</div>
           <div class="tech-item">AWS</div>
           <div class="tech-item">GCP</div>
-          <div class="tech-item">PostgreSQL</div>
-          <div class="tech-item">MySQL</div>
-          <div class="tech-item">MongoDB</div>
+          <div class="tech-item">SQL</div>
+          <div class="tech-item">NoSQL</div>
           <div class="tech-item">Redis</div>
           <div class="tech-item">Docker</div>
           <div class="tech-item">Terraform</div>
@@ -901,7 +974,7 @@
         <ul class="footer-links">
           <li>TypeScript · Golang · Kotlin · Swift</li>
           <li>React · Svelte · Web Components</li>
-          <li>PostgreSQL · MySQL · MongoDB · Redis</li>
+          <li>SQL · NoSQL · Redis</li>
           <li>AWS · GCP · Docker · Terraform</li>
         </ul>
       </div>
@@ -935,7 +1008,27 @@
 
     function handleSubmit(event) {
       event.preventDefault();
-      alert('Thank you for your message! We\'ll get back to you soon.');
+
+      // Get form values
+      const formData = new FormData(event.target);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const company = formData.get('company');
+      const project = formData.get('project');
+
+      // Build email body
+      const subject = encodeURIComponent(`New Project Inquiry from ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        (company ? `Company: ${company}\n` : '') +
+        `\nProject Details:\n${project}`
+      );
+
+      // Open default mail client
+      window.location.href = `mailto:hi@crown.dev?subject=${subject}&body=${body}`;
+
+      // Close modal and reset form
       closeModal();
       event.target.reset();
     }
