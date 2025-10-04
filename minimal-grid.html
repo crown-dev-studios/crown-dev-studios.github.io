@@ -51,7 +51,7 @@
     .header-content {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0.5rem 2rem;
+      padding: 0.5rem 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -192,6 +192,48 @@
       border-radius: 50%;
     }
 
+    /* Tech Stack Section */
+    .tech-stack {
+      padding: 4rem 0;
+      border-top: 1px solid var(--gray-300);
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    .tech-stack .section-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 2rem;
+      color: var(--gray-600);
+      text-align: center;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tech-item {
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--gray-300);
+      transition: all 0.2s;
+    }
+
+    .tech-item:hover {
+      border-color: var(--black);
+      transform: translateY(-2px);
+    }
+
     /* Services Grid */
     .services {
       padding: 8rem 0;
@@ -285,6 +327,88 @@
       position: relative;
       z-index: 1;
       transition: color 0.3s;
+    }
+
+    /* Process Section */
+    .process {
+      padding: 8rem 0;
+    }
+
+    .process-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+      position: relative;
+    }
+
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: var(--gray-300);
+      z-index: 0;
+    }
+
+    .process-step {
+      text-align: center;
+      position: relative;
+    }
+
+    .process-number {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 200;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+
+    .process-step:hover .process-number {
+      background: var(--accent);
+      color: var(--black);
+      transform: scale(1.1);
+    }
+
+    .process-step h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .process-step p {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 968px) {
+      .process-timeline {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem 2rem;
+      }
+
+      .process-timeline::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .process-timeline {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* CTA Section */
@@ -587,9 +711,9 @@
         <div class="hero-grid">
           <div class="hero-content">
             <h1>
-              Crafting <strong>Exceptional Software</strong> Experiences
+              Engineering Excellence <strong>Meets Design Precision</strong>
             </h1>
-            <p>Brooklyn-based software development studio specializing in fit-for-purpose experiences. From concept to deployment, we build software that serves your users and grows your business.</p>
+            <p>Brooklyn-based software consultancy. We turn complex technical challenges into elegant, scalable solutions.</p>
           </div>
           <div class="hero-visual">
             <div class="geometric-shapes">
@@ -602,6 +726,33 @@
       </div>
     </section>
 
+    <section class="tech-stack">
+      <div class="container">
+        <div class="section-title">Our Expertise</div>
+        <div class="tech-list">
+          <div class="tech-item">TypeScript</div>
+          <div class="tech-item">Golang</div>
+          <div class="tech-item">Kotlin</div>
+          <div class="tech-item">Swift</div>
+          <div class="tech-item">React</div>
+          <div class="tech-item">Svelte</div>
+          <div class="tech-item">Web Components</div>
+          <div class="tech-item">iOS</div>
+          <div class="tech-item">Android</div>
+          <div class="tech-item">Node.js</div>
+          <div class="tech-item">AWS</div>
+          <div class="tech-item">GCP</div>
+          <div class="tech-item">PostgreSQL</div>
+          <div class="tech-item">MySQL</div>
+          <div class="tech-item">MongoDB</div>
+          <div class="tech-item">Redis</div>
+          <div class="tech-item">Docker</div>
+          <div class="tech-item">Terraform</div>
+          <div class="tech-item">GraphQL</div>
+        </div>
+      </div>
+    </section>
+
     <section class="services">
       <div class="container">
         <div class="section-title">What We Do</div>
@@ -609,32 +760,60 @@
           <div class="service-card">
             <div class="service-number">01</div>
             <h3>Custom Development</h3>
-            <p>Building tailored software solutions from the ground up. Modern, scalable applications designed specifically for your needs.</p>
+            <p>Stuck with off-the-shelf solutions that don't fit? We build software tailored to your exact workflow that scales with your vision.</p>
           </div>
           <div class="service-card">
             <div class="service-number">02</div>
             <h3>Technical Strategy</h3>
-            <p>Architecture planning, technology selection, and technical roadmapping. Strategic guidance for long-term technical success.</p>
+            <p>Uncertain which technologies to bet on? Get expert guidance on architecture decisions that set you up for long-term success.</p>
           </div>
           <div class="service-card">
             <div class="service-number">03</div>
             <h3>System Integration</h3>
-            <p>Connecting platforms, APIs, and existing systems. Seamless integrations that unify your technology stack.</p>
+            <p>Drowning in disconnected tools? We unify your platforms and APIs into a seamless ecosystem that just works.</p>
           </div>
           <div class="service-card">
             <div class="service-number">04</div>
             <h3>Performance Optimization</h3>
-            <p>Scaling, refactoring, and improving existing applications. Making your software faster, more efficient, and cost-effective.</p>
+            <p>Slowing down as you scale? We refactor and optimize your applications to handle growth without breaking the bank.</p>
           </div>
           <div class="service-card">
             <div class="service-number">05</div>
             <h3>Migration Services</h3>
-            <p>Legacy system modernization and platform migrations. Moving your technology forward without disrupting your business.</p>
+            <p>Trapped in legacy tech? We modernize your systems and migrate platforms without disrupting your business operations.</p>
           </div>
           <div class="service-card">
             <div class="service-number">06</div>
             <h3>Technical Due Diligence</h3>
-            <p>Pre-acquisition code reviews and technical assessments. Comprehensive analysis to inform your investment decisions.</p>
+            <p>Considering an acquisition? Get comprehensive code reviews and technical assessments that reveal the true state of the technology.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="container">
+        <div class="section-title">How We Work</div>
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="process-number">1</div>
+            <h3>Discovery</h3>
+            <p>We dive deep into your challenges, goals, and technical landscape.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">2</div>
+            <h3>Strategy</h3>
+            <p>We design the architecture and technology approach that fits your needs.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">3</div>
+            <h3>Execution</h3>
+            <p>We build with precision, keeping you informed every step of the way.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">4</div>
+            <h3>Support</h3>
+            <p>We ensure smooth deployment and provide ongoing optimization.</p>
           </div>
         </div>
       </div>
@@ -642,7 +821,7 @@
 
     <section class="cta-section">
       <div class="container">
-        <h2>Ready to build something<br>exceptional together?</h2>
+        <h2>Have a technical challenge?<br>Let's solve it together.</h2>
         <button class="cta-button" onclick="openModal()">
           <span>Start a Project</span>
           <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -685,21 +864,23 @@
     <div class="footer-content">
       <div>
         <img src="/assets/crown-dev-wordmark-light-Bb2CpN23.png" alt="Crown Dev Studios" class="footer-logo">
-        <p class="footer-text">A Brooklyn-based software studio where design meets engineering excellence.</p>
+        <p class="footer-text">A Brooklyn-based software consultancy turning complex technical challenges into elegant, scalable solutions.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Expertise</h4>
+        <ul class="footer-links">
+          <li>TypeScript · Golang · Kotlin · Swift</li>
+          <li>React · Svelte · Web Components</li>
+          <li>PostgreSQL · MySQL · MongoDB · Redis</li>
+          <li>AWS · GCP · Docker · Terraform</li>
+        </ul>
       </div>
       <div class="footer-section">
         <h4>Contact</h4>
         <ul class="footer-links">
           <li><a href="mailto:hi@crown.dev">hi@crown.dev</a></li>
           <li>Brooklyn, NY</li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Connect</h4>
-        <ul class="footer-links">
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">Twitter</a></li>
+          <li><a href="#" onclick="openModal(); return false;">Quick Start →</a></li>
         </ul>
       </div>
     </div>
