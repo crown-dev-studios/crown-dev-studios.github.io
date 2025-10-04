@@ -218,8 +218,10 @@
 
     .shape {
       position: absolute;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                  border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  border-radius 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      animation: shapeEnter 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
     .shape-1 {
@@ -229,6 +231,8 @@
       top: 0;
       right: 0;
       border-radius: 0;
+      transform: translate(100%, -100%) rotate(45deg);
+      animation-delay: 0.6s;
     }
 
     .shape-2 {
@@ -239,6 +243,8 @@
       bottom: 0;
       left: 0;
       border-radius: 0;
+      transform: translate(-100%, 100%) rotate(-45deg);
+      animation-delay: 0.8s;
     }
 
     .shape-3 {
@@ -247,8 +253,27 @@
       background: var(--accent);
       top: 52%;
       left: 44%;
-      transform: translate(-52%, -44%);
+      transform: translate(-52%, -44%) scale(0) rotate(180deg);
       border-radius: 0;
+      animation-delay: 1s;
+    }
+
+    @keyframes shapeEnter {
+      to {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg);
+      }
+    }
+
+    .shape-3 {
+      animation-name: shapeEnterCenter;
+    }
+
+    @keyframes shapeEnterCenter {
+      to {
+        opacity: 1;
+        transform: translate(-52%, -44%) scale(1) rotate(0deg);
+      }
     }
 
     .geometric-shapes:hover .shape-1 {
@@ -262,7 +287,7 @@
     }
 
     .geometric-shapes:hover .shape-3 {
-      transform: translate(-50%, -50%) rotate(360deg);
+      transform: translate(-52%, -44%) rotate(360deg);
       border-radius: 50%;
     }
 
