@@ -659,38 +659,52 @@
         overflow: visible;
       }
 
-      .shape {
-        animation: shapeEnterMobile 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      }
-
       .shape-1 {
-        transform: scale(0.8) translate(100%, -100%) rotate(45deg);
+        transform: scale(0.8) translate(0, 0) rotate(0deg);
+        animation-name: shapeEnter1Mobile;
       }
 
       .shape-2 {
-        transform: scale(0.8) translate(-100%, 100%) rotate(-45deg);
+        transform: scale(0.8) translate(0, 0) rotate(0deg);
+        animation-name: shapeEnter2Mobile;
       }
 
       .shape-3 {
-        transform: scale(0.8) translate(-52%, -44%) scale(0) rotate(180deg);
+        transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+        animation-name: shapeEnter3Mobile;
       }
 
-      @keyframes shapeEnterMobile {
-        to {
-          opacity: 1;
-          transform: scale(0.8) translate(0, 0) rotate(0deg);
+      @keyframes shapeEnter1Mobile {
+        from {
+          opacity: 0;
+          transform: scale(0.8) translate(100%, -100%) rotate(45deg);
         }
       }
 
-      .shape-3 {
-        animation-name: shapeEnterCenterMobile;
+      @keyframes shapeEnter2Mobile {
+        from {
+          opacity: 0;
+          transform: scale(0.8) translate(-100%, 100%) rotate(-45deg);
+        }
       }
 
-      @keyframes shapeEnterCenterMobile {
-        to {
-          opacity: 1;
-          transform: scale(0.8) translate(-52%, -44%) scale(1) rotate(0deg);
+      @keyframes shapeEnter3Mobile {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0) rotate(180deg);
         }
+      }
+
+      .geometric-shapes:hover .shape-1 {
+        transform: scale(0.8) translate(12.5px, -12.5px) rotate(180deg);
+      }
+
+      .geometric-shapes:hover .shape-2 {
+        transform: scale(0.8) translate(-12.5px, 12.5px) rotate(-180deg);
+      }
+
+      .geometric-shapes:hover .shape-3 {
+        transform: translate(-50%, -50%) scale(0.8) rotate(360deg);
       }
 
       .footer-content {
