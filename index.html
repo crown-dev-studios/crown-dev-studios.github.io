@@ -37,15 +37,6 @@
   <link rel="preload" href="https://use.typekit.net/nkm5lpa.css" as="style">
   <link rel="stylesheet" href="https://use.typekit.net/nkm5lpa.css">
 
-  <!-- Font display swap override for better performance -->
-  <style>
-    @supports (font-display: swap) {
-      @font-face {
-        font-family: 'mundial';
-        font-display: swap;
-      }
-    }
-  </style>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -579,12 +570,14 @@
       .hero-grid {
         grid-template-columns: 1fr;
         gap: 0;
+        max-width: 100%;
       }
 
       .hero-visual {
-        max-width: 400px;
+        max-width: 100%;
         margin: 0 auto;
         min-height: 400px;
+        overflow: hidden;
       }
 
       .footer-content {
