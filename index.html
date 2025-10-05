@@ -1520,25 +1520,27 @@
       requestAnimationFrame(animate);
     }
 
-    // Track mouse across entire page when canvas is in view
-    document.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const canvasInView = rect.top < window.innerHeight && rect.bottom > 0;
+    // Track mouse across entire page when canvas is in view (desktop only)
+    if (window.innerWidth > 968) {
+      document.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const canvasInView = rect.top < window.innerHeight && rect.bottom > 0;
 
-      if (canvasInView) {
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
+        if (canvasInView) {
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
 
-        // Track if mouse is outside canvas bounds
-        mouse.isOverCanvas =
-          mouse.x >= 0 && mouse.x <= rect.width &&
-          mouse.y >= 0 && mouse.y <= rect.height;
-      } else {
-        mouse.x = null;
-        mouse.y = null;
-        mouse.isOverCanvas = false;
-      }
-    });
+          // Track if mouse is outside canvas bounds
+          mouse.isOverCanvas =
+            mouse.x >= 0 && mouse.x <= rect.width &&
+            mouse.y >= 0 && mouse.y <= rect.height;
+        } else {
+          mouse.x = null;
+          mouse.y = null;
+          mouse.isOverCanvas = false;
+        }
+      });
+    }
 
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
