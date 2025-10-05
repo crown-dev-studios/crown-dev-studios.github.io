@@ -133,7 +133,7 @@
     }
 
     .logo {
-      height: 96px;
+      height: 64px;
       width: auto;
     }
 
@@ -211,99 +211,10 @@
       aspect-ratio: 1;
     }
 
-    @media (max-width: 968px) {
-      .hero-visual {
-        overflow: hidden;
-      }
-    }
-
-    .geometric-shapes {
-      position: relative;
+    #networkCanvas {
       width: 100%;
       height: 100%;
-    }
-
-    .shape {
-      position: absolute;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                  border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .shape-1 {
-      width: 60%;
-      height: 60%;
-      background: var(--black);
-      top: 0;
-      right: 0;
-      border-radius: 0;
-      transform: translate(0, 0) rotate(0deg);
-      opacity: 1;
-      animation: shapeEnter1 1s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-      animation-delay: 0.6s;
-    }
-
-    .shape-2 {
-      width: 50%;
-      height: 50%;
-      border: 2px solid var(--black);
-      box-sizing: border-box;
-      bottom: 0;
-      left: 0;
-      border-radius: 0;
-      transform: translate(0, 0) rotate(0deg);
-      opacity: 1;
-      animation: shapeEnter2 1s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-      animation-delay: 0.8s;
-    }
-
-    .shape-3 {
-      width: 30%;
-      height: 30%;
-      background: var(--accent);
-      top: 50%;
-      left: 50%;
-      border-radius: 0;
-      transform: translate(-50%, -50%) scale(1) rotate(0deg);
-      opacity: 1;
-      animation: shapeEnter3 1s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-      animation-delay: 1s;
-    }
-
-    @keyframes shapeEnter1 {
-      from {
-        opacity: 0;
-        transform: translate(100%, -100%) rotate(45deg);
-      }
-    }
-
-    @keyframes shapeEnter2 {
-      from {
-        opacity: 0;
-        transform: translate(-100%, 100%) rotate(-45deg);
-      }
-    }
-
-    @keyframes shapeEnter3 {
-      from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0) rotate(180deg);
-      }
-    }
-
-    .geometric-shapes:hover .shape-1 {
-      transform: translate(10px, -10px) rotate(180deg);
-      border-radius: 50%;
-    }
-
-    .geometric-shapes:hover .shape-2 {
-      transform: translate(-10px, 10px) rotate(-180deg);
-      border-radius: 50%;
-    }
-
-    .geometric-shapes:hover .shape-3 {
-      transform: translate(-52%, -44%) rotate(360deg);
-      border-radius: 50%;
+      display: block;
     }
 
     /* Tech Stack Section */
@@ -664,58 +575,6 @@
         min-height: 400px;
       }
 
-      .geometric-shapes {
-        overflow: visible;
-      }
-
-      .shape-1 {
-        transform: scale(0.8) translate(0, 0) rotate(0deg);
-        animation-name: shapeEnter1Mobile;
-      }
-
-      .shape-2 {
-        transform: scale(0.8) translate(0, 0) rotate(0deg);
-        animation-name: shapeEnter2Mobile;
-      }
-
-      .shape-3 {
-        transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
-        animation-name: shapeEnter3Mobile;
-      }
-
-      @keyframes shapeEnter1Mobile {
-        from {
-          opacity: 0;
-          transform: scale(0.8) translate(100%, -100%) rotate(45deg);
-        }
-      }
-
-      @keyframes shapeEnter2Mobile {
-        from {
-          opacity: 0;
-          transform: scale(0.8) translate(-100%, 100%) rotate(-45deg);
-        }
-      }
-
-      @keyframes shapeEnter3Mobile {
-        from {
-          opacity: 0;
-          transform: translate(-50%, -50%) scale(0) rotate(180deg);
-        }
-      }
-
-      .geometric-shapes:hover .shape-1 {
-        transform: scale(0.8) translate(12.5px, -12.5px) rotate(180deg);
-      }
-
-      .geometric-shapes:hover .shape-2 {
-        transform: scale(0.8) translate(-12.5px, 12.5px) rotate(-180deg);
-      }
-
-      .geometric-shapes:hover .shape-3 {
-        transform: translate(-50%, -50%) scale(0.8) rotate(360deg);
-      }
-
       .footer-content {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -920,11 +779,7 @@
             <p>Brooklyn-based software consultancy. We turn complex technical challenges into elegant, scalable solutions.</p>
           </div>
           <div class="hero-visual">
-            <div class="geometric-shapes">
-              <div class="shape shape-1"></div>
-              <div class="shape shape-2"></div>
-              <div class="shape shape-3"></div>
-            </div>
+            <canvas id="networkCanvas"></canvas>
           </div>
         </div>
       </div>
@@ -1138,6 +993,342 @@
         closeModal();
       }
     });
+
+    // Neural Network Visualization
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let nodes = [];
+    let connections = [];
+    let particles = [];
+    let mouse = { x: null, y: null };
+    let pulses = [];
+
+    function resizeCanvas() {
+      const container = canvas.parentElement;
+      const dpr = window.devicePixelRatio || 1;
+
+      width = container.offsetWidth;
+      height = container.offsetHeight;
+
+      // Set canvas size accounting for device pixel ratio
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+
+      // Scale context to match device pixel ratio
+      ctx.scale(dpr, dpr);
+
+      initNetwork();
+    }
+
+    class Node {
+      constructor(x, y, layer, totalInLayer) {
+        this.baseX = x;
+        this.baseY = y;
+        this.x = x;
+        this.y = y;
+        this.layer = layer;
+        this.radius = layer === 1 || layer === 2 ? 5 : 4;
+        this.vx = (Math.random() - 0.5) * 0.2;
+        this.vy = (Math.random() - 0.5) * 0.2;
+        this.pulsePhase = Math.random() * Math.PI * 2;
+        this.pulseSpeed = 0.02 + Math.random() * 0.01;
+        this.isAccent = layer === 1 && totalInLayer > 2 && Math.random() > 0.5;
+      }
+
+      update(time) {
+        // Gentle floating
+        this.x += this.vx;
+        this.y += this.vy;
+
+        const dx = this.baseX - this.x;
+        const dy = this.baseY - this.y;
+        this.x += dx * 0.015;
+        this.y += dy * 0.015;
+
+        // Mouse interaction - attraction/repulsion based on distance
+        if (mouse.x !== null && mouse.y !== null) {
+          const distX = mouse.x - this.x;
+          const distY = mouse.y - this.y;
+          const dist = Math.sqrt(distX * distX + distY * distY);
+
+          if (dist < 80) {
+            // Repel when very close
+            const force = (80 - dist) / 80;
+            this.x -= distX * force * 0.05;
+            this.y -= distY * force * 0.05;
+          } else if (dist < 180) {
+            // Gentle attraction in mid-range
+            const force = (dist - 80) / 100;
+            this.x += distX * force * 0.008;
+            this.y += distY * force * 0.008;
+          }
+        }
+
+        this.pulsePhase += this.pulseSpeed;
+      }
+
+      draw(time) {
+        const pulse = Math.sin(this.pulsePhase) * 0.3 + 1;
+        const drawRadius = this.radius * pulse;
+
+        // Glow effect for accent nodes
+        if (this.isAccent) {
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = '#ff9533';
+        }
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, drawRadius, 0, Math.PI * 2);
+        ctx.fillStyle = this.isAccent ? '#ff9533' : '#000000';
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    class Connection {
+      constructor(node1, node2) {
+        this.node1 = node1;
+        this.node2 = node2;
+        this.weight = 0.5 + Math.random() * 0.5;
+        this.baseOpacity = 0.08 + this.weight * 0.08;
+      }
+
+      draw() {
+        const dist = mouse.x !== null ?
+          Math.min(
+            Math.hypot(mouse.x - this.node1.x, mouse.y - this.node1.y),
+            Math.hypot(mouse.x - this.node2.x, mouse.y - this.node2.y)
+          ) : 999;
+
+        let opacity = this.baseOpacity;
+        let lineWidth = this.weight * 1.5;
+
+        if (dist < 120) {
+          const proximity = (120 - dist) / 120;
+          opacity = this.baseOpacity + proximity * 0.3;
+          lineWidth += proximity * 1.5;
+
+          // Glow effect on hover
+          if (dist < 80) {
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = 'rgba(255, 149, 51, 0.3)';
+          }
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(this.node1.x, this.node1.y);
+        ctx.lineTo(this.node2.x, this.node2.y);
+        ctx.strokeStyle = `rgba(0, 0, 0, ${opacity})`;
+        ctx.lineWidth = lineWidth;
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    class Particle {
+      constructor(connection) {
+        this.connection = connection;
+        this.progress = Math.random();
+        this.speed = (0.001 + Math.random() * 0.002) * connection.weight;
+        this.trail = [];
+        this.trailLength = 8;
+      }
+
+      update() {
+        this.progress += this.speed;
+        if (this.progress > 1) {
+          this.progress = 0;
+          this.trail = [];
+        }
+
+        const x = this.connection.node1.x +
+          (this.connection.node2.x - this.connection.node1.x) * this.progress;
+        const y = this.connection.node1.y +
+          (this.connection.node2.y - this.connection.node1.y) * this.progress;
+
+        this.trail.unshift({ x, y });
+        if (this.trail.length > this.trailLength) {
+          this.trail.pop();
+        }
+      }
+
+      draw() {
+        // Draw trail
+        this.trail.forEach((point, i) => {
+          const alpha = (1 - i / this.trailLength) * 0.6;
+          const size = (1 - i / this.trailLength) * 2.5;
+
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 149, 51, ${alpha})`;
+          ctx.fill();
+        });
+      }
+    }
+
+    class Pulse {
+      constructor(startNode) {
+        this.currentNodes = [startNode];
+        this.visitedNodes = new Set([startNode]);
+        this.progress = 0;
+        this.speed = 0.08;
+        this.opacity = 1;
+      }
+
+      update() {
+        this.progress += this.speed;
+
+        if (this.progress >= 1) {
+          this.progress = 0;
+          const nextNodes = [];
+
+          this.currentNodes.forEach(node => {
+            connections.forEach(conn => {
+              if (conn.node1 === node && !this.visitedNodes.has(conn.node2)) {
+                nextNodes.push(conn.node2);
+                this.visitedNodes.add(conn.node2);
+              }
+            });
+          });
+
+          this.currentNodes = nextNodes;
+          this.opacity *= 0.7;
+        }
+
+        return this.currentNodes.length > 0 && this.opacity > 0.1;
+      }
+
+      draw() {
+        this.currentNodes.forEach(node => {
+          const pulseRadius = 8 + this.progress * 6;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, pulseRadius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(255, 149, 51, ${this.opacity * (1 - this.progress)})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        });
+      }
+    }
+
+    function initNetwork() {
+      nodes = [];
+      connections = [];
+      particles = [];
+
+      const layers = [3, 5, 5, 3];
+      const layerSpacing = width / (layers.length + 1);
+
+      layers.forEach((nodeCount, layerIndex) => {
+        const baseSpacing = height / (nodeCount + 1);
+        for (let i = 0; i < nodeCount; i++) {
+          const x = layerSpacing * (layerIndex + 1);
+          // Add organic randomness to y position
+          const yOffset = (Math.random() - 0.5) * baseSpacing * 0.3;
+          const y = baseSpacing * (i + 1) + yOffset;
+          nodes.push(new Node(x, y, layerIndex, nodeCount));
+        }
+      });
+
+      // Create selective connections (not fully connected)
+      let nodeIndex = 0;
+      for (let layer = 0; layer < layers.length - 1; layer++) {
+        const currentLayerCount = layers[layer];
+        const nextLayerCount = layers[layer + 1];
+        const currentLayerStart = nodeIndex;
+        const nextLayerStart = nodeIndex + currentLayerCount;
+
+        for (let i = 0; i < currentLayerCount; i++) {
+          for (let j = 0; j < nextLayerCount; j++) {
+            // Only create some connections for cleaner look
+            if (Math.random() < 0.7) {
+              const conn = new Connection(
+                nodes[currentLayerStart + i],
+                nodes[nextLayerStart + j]
+              );
+              connections.push(conn);
+
+              // Fewer particles, weighted by connection strength
+              if (Math.random() < 0.15 * conn.weight) {
+                particles.push(new Particle(conn));
+              }
+            }
+          }
+        }
+        nodeIndex += currentLayerCount;
+      }
+    }
+
+    let time = 0;
+    function animate() {
+      time += 0.016;
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw connections
+      connections.forEach(conn => conn.draw());
+
+      // Update and draw particles
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      // Update and draw pulses
+      pulses = pulses.filter(pulse => {
+        const alive = pulse.update();
+        if (alive) pulse.draw();
+        return alive;
+      });
+
+      // Update and draw nodes
+      nodes.forEach(node => {
+        node.update(time);
+        node.draw(time);
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      // Find closest node to click
+      let closestNode = null;
+      let closestDist = Infinity;
+
+      nodes.forEach(node => {
+        const dist = Math.hypot(clickX - node.x, clickY - node.y);
+        if (dist < closestDist && dist < 30) {
+          closestDist = dist;
+          closestNode = node;
+        }
+      });
+
+      if (closestNode) {
+        pulses.push(new Pulse(closestNode));
+      }
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    animate();
   </script>
 </body>
 
