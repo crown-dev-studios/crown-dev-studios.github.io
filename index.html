@@ -35,6 +35,16 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="https://use.typekit.net/nkm5lpa.css">
 
+  <!-- Font display swap override for better performance -->
+  <style>
+    @supports (font-display: swap) {
+      @font-face {
+        font-family: 'mundial';
+        font-display: swap;
+      }
+    }
+  </style>
+
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -763,7 +773,10 @@
 <body>
   <header>
     <div class="header-content">
-      <img src="logo-lockup-dark.png" alt="Crown Dev Studios" class="logo">
+      <picture>
+        <source srcset="logo-lockup-dark.webp" type="image/webp">
+        <img src="logo-lockup-dark.png" alt="Crown Dev Studios" class="logo">
+      </picture>
       <button class="nav-button" onclick="scrollToCTA()">Work With Us</button>
     </div>
   </header>
@@ -921,7 +934,10 @@
   <footer>
     <div class="footer-content">
       <div>
-        <img src="/logo-lockup-light.png" alt="Crown Dev Studios" class="footer-logo">
+        <picture>
+          <source srcset="/logo-lockup-light.webp" type="image/webp">
+          <img src="/logo-lockup-light.png" alt="Crown Dev Studios" class="footer-logo">
+        </picture>
         <p class="footer-text">A Brooklyn-based software consultancy turning complex technical challenges into elegant, scalable solutions.</p>
       </div>
       <div class="footer-section">
