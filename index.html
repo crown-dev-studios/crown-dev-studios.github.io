@@ -36,13 +36,11 @@
   <link rel="canonical" href="https://crown.dev/">
 
   <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
-  <link rel="preconnect" href="https://p.typekit.net" crossorigin>
-  <link rel="dns-prefetch" href="https://use.typekit.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Fonts - preload for better caching -->
-  <link rel="preload" href="https://use.typekit.net/nkm5lpa.css" as="style">
-  <link rel="stylesheet" href="https://use.typekit.net/nkm5lpa.css">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 
   <!-- Structured Data -->
@@ -175,13 +173,23 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: mundial, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--white);
+      background-image:
+        radial-gradient(at 40% 20%, rgba(255, 149, 51, 0.03) 0px, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(0, 0, 0, 0.02) 0px, transparent 50%);
       color: var(--black);
-      line-height: 1.5;
+      line-height: 1.6;
       width: 100%;
       position: relative;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
     .container {
@@ -241,6 +249,7 @@
       align-items: center;
       justify-content: center;
       padding-top: 80px;
+      overflow: hidden;
     }
 
     .hero-grid {
@@ -251,30 +260,33 @@
     }
 
     .hero-content h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 200;
-      line-height: 1.1;
-      margin-bottom: 2rem;
-      letter-spacing: -0.02em;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.03em;
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease-out 0.2s forwards;
+      transform: translateY(20px);
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
 
     .hero-content h1 strong {
       font-weight: 700;
       display: block;
+      font-style: italic;
+      font-family: 'Instrument Serif', serif;
     }
 
     .hero-content p {
-      font-size: 1.125rem;
+      font-size: 1.25rem;
       color: var(--gray-600);
-      max-width: 500px;
-      margin-bottom: 3rem;
-      font-weight: 300;
+      max-width: 540px;
+      margin-bottom: 0;
+      font-weight: 400;
+      line-height: 1.7;
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease-out 0.4s forwards;
+      transform: translateY(20px);
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
     }
 
     @keyframes fadeInUp {
@@ -323,19 +335,40 @@
     }
 
     .tech-item {
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: var(--black);
-      padding: 0.75rem 1.5rem;
+      padding: 0.875rem 1.75rem;
       border: 1px solid var(--gray-300);
-      transition: all 0.2s;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 149, 51, 0.1), transparent);
+      transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tech-item:hover::before {
+      left: 100%;
     }
 
     .tech-item:hover {
-      border-color: var(--black);
-      transform: translateY(-2px);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 149, 51, 0.15);
     }
 
     /* Services Grid */
@@ -536,10 +569,11 @@
     }
 
     .cta-section h2 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 200;
-      margin-bottom: 3rem;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      margin-bottom: 4rem;
       line-height: 1.2;
+      letter-spacing: -0.02em;
     }
 
     .cta-button {
@@ -549,29 +583,50 @@
       background: var(--black);
       color: var(--white);
       border: 2px solid var(--black);
-      padding: 1.5rem 3rem;
+      padding: 1.5rem 3.5rem;
       font-family: inherit;
-      font-size: 1rem;
-      font-weight: 500;
+      font-size: 0.875rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
     }
 
     .cta-button:hover {
-      background: var(--white);
-      color: var(--black);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+      box-shadow: 0 12px 32px rgba(255, 149, 51, 0.3);
+      transform: translateY(-2px);
     }
 
     .cta-arrow {
-      width: 24px;
-      height: 24px;
-      transition: transform 0.2s;
+      width: 20px;
+      height: 20px;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .cta-button:hover .cta-arrow {
-      transform: translateX(5px);
+      transform: translateX(6px);
     }
 
     /* Footer */
@@ -840,17 +895,79 @@
         width: 100%;
       }
     }
+
+    /* Scroll Animations */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-reveal-scale {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .scroll-reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Stagger delays for sequential reveals */
+    .scroll-reveal:nth-child(1) { transition-delay: 0ms; }
+    .scroll-reveal:nth-child(2) { transition-delay: 100ms; }
+    .scroll-reveal:nth-child(3) { transition-delay: 200ms; }
+    .scroll-reveal:nth-child(4) { transition-delay: 300ms; }
+    .scroll-reveal:nth-child(5) { transition-delay: 400ms; }
+    .scroll-reveal:nth-child(6) { transition-delay: 500ms; }
+
+    /* Scroll Progress Indicator */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark, #e67e1f));
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 1000;
+      will-change: transform;
+    }
+
+    /* Parallax Effect */
+    .parallax {
+      will-change: transform;
+    }
+
+    /* Magnetic Button Effect */
+    .magnetic {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
   </style>
 </head>
 
 <body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <header>
     <div class="header-content">
       <picture>
         <source srcset="logo-lockup-dark.webp" type="image/webp">
         <img src="logo-lockup-dark.png" alt="Crown Dev Studios" class="logo">
       </picture>
-      <button class="nav-button" onclick="scrollToCTA()">Work With Us</button>
+      <button class="nav-button magnetic" onclick="scrollToCTA()">Work With Us</button>
     </div>
   </header>
 
@@ -864,7 +981,7 @@
             </h1>
             <p>Brooklyn-based software studio. We turn complex technical challenges into elegant, scalable solutions.</p>
           </div>
-          <div class="hero-visual">
+          <div class="hero-visual parallax">
             <canvas id="networkCanvas"></canvas>
           </div>
         </div>
@@ -873,48 +990,48 @@
 
     <section class="tech-stack">
       <div class="container">
-        <div class="section-title">Our Expertise</div>
+        <div class="section-title scroll-reveal">Our Expertise</div>
         <div class="tech-list">
-          <div class="tech-item">Full-Stack Web Development</div>
-          <div class="tech-item">Native & Cross-Platform Mobile</div>
-          <div class="tech-item">API Design & Integration</div>
-          <div class="tech-item">AI / Agentic Workflows</div>
-          <div class="tech-item">Cloud Infrastructure & DevOps</div>
-          <div class="tech-item">Data Architecture</div>
+          <div class="tech-item scroll-reveal">Full-Stack Web Development</div>
+          <div class="tech-item scroll-reveal">Native & Cross-Platform Mobile</div>
+          <div class="tech-item scroll-reveal">API Design & Integration</div>
+          <div class="tech-item scroll-reveal">AI / Agentic Workflows</div>
+          <div class="tech-item scroll-reveal">Cloud Infrastructure & DevOps</div>
+          <div class="tech-item scroll-reveal">Data Architecture</div>
         </div>
       </div>
     </section>
 
     <section class="services">
       <div class="container">
-        <div class="section-title">What We Do</div>
+        <div class="section-title scroll-reveal">What We Do</div>
         <div class="services-grid">
-          <div class="service-card">
+          <div class="service-card scroll-reveal-scale">
             <div class="service-number">01</div>
             <h3>Custom Development</h3>
             <p>Stuck with off-the-shelf solutions that don't fit? We build software tailored to your exact workflow that scales with your vision.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card scroll-reveal-scale">
             <div class="service-number">02</div>
             <h3>Technical Strategy</h3>
             <p>Uncertain which technologies to bet on? Get expert guidance on architecture decisions that set you up for long-term success.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card scroll-reveal-scale">
             <div class="service-number">03</div>
             <h3>System Integration</h3>
             <p>Drowning in disconnected tools? We unify your platforms and APIs into a seamless ecosystem that just works.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card scroll-reveal-scale">
             <div class="service-number">04</div>
             <h3>Performance Optimization</h3>
             <p>Slowing down as you scale? We refactor and optimize your applications to handle growth without breaking the bank.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card scroll-reveal-scale">
             <div class="service-number">05</div>
             <h3>Migration Services</h3>
             <p>Trapped in legacy tech? We modernize your systems and migrate platforms without disrupting your business operations.</p>
           </div>
-          <div class="service-card">
+          <div class="service-card scroll-reveal-scale">
             <div class="service-number">06</div>
             <h3>Technical Due Diligence</h3>
             <p>Considering an acquisition? Get comprehensive code reviews and technical assessments that reveal the true state of the technology.</p>
@@ -925,24 +1042,24 @@
 
     <section class="process">
       <div class="container">
-        <div class="section-title">How We Work</div>
+        <div class="section-title scroll-reveal">How We Work</div>
         <div class="process-timeline">
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="process-number">1</div>
             <h3>Discovery</h3>
             <p>We dive deep into your challenges, goals, and technical landscape.</p>
           </div>
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="process-number">2</div>
             <h3>Strategy</h3>
             <p>We design the architecture and technology approach that fits your needs.</p>
           </div>
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="process-number">3</div>
             <h3>Execution</h3>
             <p>We build with precision, keeping you informed every step of the way.</p>
           </div>
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="process-number">4</div>
             <h3>Support</h3>
             <p>We ensure smooth deployment and provide ongoing optimization.</p>
@@ -953,8 +1070,8 @@
 
     <section class="cta-section">
       <div class="container">
-        <h2>Have a technical challenge?<br>Let's solve it together.</h2>
-        <button class="cta-button" onclick="openModal()">
+        <h2 class="scroll-reveal">Have a technical challenge?<br>Let's solve it together.</h2>
+        <button class="cta-button magnetic scroll-reveal" onclick="openModal()">
           <span>Start a Project</span>
           <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1071,6 +1188,94 @@
       if (event.target === this) {
         closeModal();
       }
+    });
+
+    // ========== SCROLL ANIMATIONS & INTERACTIONS ==========
+
+    // Scroll Progress Indicator
+    const scrollProgress = document.getElementById('scrollProgress');
+
+    function updateScrollProgress() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollPercent = scrollTop / (documentHeight - windowHeight);
+
+      if (scrollProgress) {
+        scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+      }
+    }
+
+    // Scroll-triggered Reveal Animations using Intersection Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          // Optionally unobserve after revealing to improve performance
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all scroll-reveal elements
+    document.querySelectorAll('.scroll-reveal, .scroll-reveal-scale').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Parallax Effect for Hero Visual
+    const heroVisual = document.querySelector('.hero-visual');
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function updateParallax() {
+      if (heroVisual && window.pageYOffset < window.innerHeight) {
+        const scrolled = window.pageYOffset;
+        heroVisual.style.transform = `translateY(${scrolled * 0.2}px)`;
+      }
+      ticking = false;
+    }
+
+    // Magnetic Button Effect
+    const magneticButtons = document.querySelectorAll('.magnetic');
+
+    magneticButtons.forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const moveX = x * 0.3;
+        const moveY = y * 0.3;
+
+        button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // Unified scroll event handler
+    function onScroll() {
+      lastScrollY = window.pageYOffset;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScrollProgress();
+          updateParallax();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    // Event Listeners
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', () => {
+      updateScrollProgress();
     });
 
     // Neural Network Particle Visualization
